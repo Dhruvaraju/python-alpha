@@ -1,5 +1,25 @@
 # python_alpha
-Learning log for python
+- [python_alpha](#python_alpha)
+    - [python](#python)
+    - [Workspace setup](#workspace-setup)
+    - [First program](#first-program)
+    - [Variables](#variables)
+    - [Data-types in python](#data-types-in-python)
+    - [Strings](#strings)
+    - [String formatting](#string-formatting)
+    - [User Input](#user-input)
+    - [Simple app to calculate age in months and seconds](#simple-app-to-calculate-age-in-months-and-seconds)
+    - [List, tuples and Sets](#list-tuples-and-sets)
+      - [List](#list)
+      - [Tuple](#tuple)
+      - [set](#set)
+    - [Set operations](#set-operations)
+    - [Booleans and comparison](#booleans-and-comparison)
+    - [If and corresponding operations](#if-and-corresponding-operations)
+      - [In keyword](#in-keyword)
+    - [Loops](#loops)
+      - [While](#while)
+      - [For](#for)
 
 ### python
 - A scripting language, which can be used for automating tasks
@@ -95,6 +115,7 @@ print(f"You are {user_age * 365 * 24 * 60 * 60} seconds old.")
 
 ### List, tuples and Sets 
 - All these are used to store groups of values.
+- We can use sum function to get sum of integers in a list, tuple or set
 
 #### List 
 - A list is defined with as square braces like `list_example = ["this", "is", "list"]`
@@ -186,4 +207,149 @@ print(local_brands)
 # updates the left side set to have only values which are present in both the sets
 print(local_brands.intersection_update(foreign_brands)) # local_brands will become blank 
 print(local_brands)
+```
+### Booleans and comparison
+- A boolean has two values true or false
+- It will start with capital case True or False
+- Comparisons like >, <, >=, <=, ==, != will result in boolean values
+- 'is' can be used to check if the memory location is same, explained in below example
+
+> Do not use `is` unless it is a memory location check.
+
+```python
+# Boolean is a data type that can only have two values: True or False
+# In python boolean will start with capital case
+boolean_example = True
+print(boolean_example)
+
+hero = "Batman"
+villain = "Joker"
+print(hero == villain) # False
+print(hero != villain) # True
+# We have other comapisions like >, <, >=, <=, !=
+
+marvel_set = {"Spider-man", "ironman","hulk"}
+dc_set = {"batman", "superman", "flash", "wonder-woman"}
+marvel_genesis_set = {"Spider-man","ironman","hulk"}
+
+print(marvel_set == marvel_genesis_set) # true
+print(marvel_set is marvel_genesis_set) # false
+# The 'is' keyword will check the exact value with memory location hence it returns false
+marvel_genesis_set = marvel_set
+print(marvel_set == marvel_genesis_set) # true
+# As both are the same it will return true
+```
+### If and corresponding operations
+- any `if` statement is used for conditional checks
+- general syntax will appear as below
+  
+```python
+if conditional-statement :
+    print("condition satisfied so this will be print")
+```
+- colon after condition and indentation in the next-line is required for python to understand that this is an if statement.
+- like other languages we can use else block as below.
+
+```python
+if conditional-statement :
+    print("condition satisfied so this will be print")
+else :
+    print("when condition is not met this will be executed")
+```
+- we can also use else if for secondary conditions as 'elif`
+
+```python
+if conditional-statement :
+    print("condition satisfied so this will be print")
+elif secondary-condition :
+    print("secondary condition satisfied")
+else :
+    print("None of the conditions satisfied")
+```
+**Example**
+```python
+day_of_week = input("Enter a day of the week: ").lower()
+if day_of_week == "monday":
+    print("Today is Monday")
+elif day_of_week == "tuesday":
+    print("Today is Tuesday")
+else:
+    print("Today is not Monday or Tuesday")
+```
+
+#### In keyword
+- in keyword is used to see if a value is present in set or list or tuple or string
+
+```python
+movies_set = {"The Matrix", "The Matrix Reloaded", "The Matrix Revolutions"}
+if "The Matrix" in movies_set:
+    print("The Matrix is in the set")
+
+if "hi" in "hi how are you":
+    print("hi is in the string")
+
+number_entered = int(input("Enter a number: "))
+if number_entered == 7:
+    print("you guessed it right")
+elif number_entered - 7 in (-1,1):
+    print("Missed it by 1")
+else:
+    print("incorrect")
+
+# The same class above can be rewritten using abs function
+number_entered = int(input("Enter a number: "))
+if number_entered == 7:
+    print("you guessed it right")
+elif abs(number_entered - 7) == 1:
+    print("Missed it by 1")
+else:
+    print("incorrect")
+```
+### Loops
+#### While
+- While will be executed until the condition fails
+- if you never want a while loop to exit just use while true, to break the flow use break keyword.
+  
+#### For
+- Is used when you have a list of values to iterate through like a list set or tuple
+- It is used in conjunction with the `in` keyword.
+
+```python
+number = 9
+player_opinion = input("Do you wish to play? (Y/n): ")
+
+while player_opinion != "n":
+    player_guess = int(input("Enter a number: "))
+    if player_guess == number:
+        print("You guessed it right")
+    elif abs(player_guess - number) == 1:
+        print("You missed it by 1")
+    else:
+        print("You guessed it wrong")
+
+    player_opinion = input("Do you wish to play? (Y/n): ")
+
+# The same can be executed as below
+# while True:
+
+another_number = 7
+while True:
+    second_game_check = input("Do you wish to guess another number? (Y/n): ")
+    if second_game_check == "n":
+        break
+    player_guess = int(input("Enter a number: "))
+    if player_guess == another_number:
+        print("You guessed it right")
+    elif abs(player_guess - another_number) == 1:
+        print("You missed it by 1")
+    else:
+        print("You guessed it wrong")
+
+movies_seen = {"up", "red", "conair", "matrix", "independence"}
+for movie in movies_seen:
+    print(movie)
+
+# We can also use range ust to iterate for a certain number of times
+for i in range(10):
+    print(i)
 ```
