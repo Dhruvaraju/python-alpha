@@ -20,6 +20,8 @@
     - [Loops](#loops)
       - [While](#while)
       - [For](#for)
+    - [List Comprehension](#list-comprehension)
+    - [Dictionaries](#dictionaries)
 
 ### python
 - A scripting language, which can be used for automating tasks
@@ -352,4 +354,60 @@ for movie in movies_seen:
 # We can also use range ust to iterate for a certain number of times
 for i in range(10):
     print(i)
+```
+### List Comprehension
+- Minor operations on lists can be performed using them
+- We can perform operations on integer and string
+
+```python
+example_numbers = [1,2,3,4,5,6]
+# List comprehension is used to create a new list from an existing list
+# The following is a list comprehension that creates a new list from the existing list
+new_number_list = []
+for number in example_numbers:
+    new_number_list.append(number * 2)
+print(new_number_list)
+
+# The same can be achieved by below code
+list_com_from_example = [number * 6 for number in example_numbers]
+print(list_com_from_example)
+
+# List comprehension on strings
+# The following is a list comprehension that creates a new list from the existing list
+friends = ["John", "Paul", "George", "Ringo", "Rango", "Ronald"]
+friends_name_starting_with_r = [friend for friend in friends if friend.startswith("R")]
+print(friends_name_starting_with_r)
+```
+### Dictionaries
+- Used to store key and value pairs.
+- Can use subscript to get value of a specific key.
+- To get lists of values use the values() function.
+- To get list of keys use keys() function
+- To get list of keys and values use items() function
+
+```python
+# A dictionary example
+students_marks = {"rahul": 90, "sachin": 100, "saurav": 80, "shivam": 70}
+print(students_marks["rahul"])
+
+# Adding a new key value pair to the dictionary
+students_marks["dexter"] = 94
+print(students_marks)
+# Deleting a key value pair from the dictionary
+del students_marks["sachin"]
+print(students_marks)
+# Updating a key value pair in the dictionary
+students_marks["rahul"] = 88
+print(students_marks)
+
+# to get list of values from a dictionary use values() function
+print(students_marks.values())
+# to get list of keys from a dictionary use keys() function
+print(students_marks.keys())
+# to get list of keys and values from a dictionary use items() function
+print(students_marks.items())
+
+# Iterating manually and using for loop
+for key, value in students_marks.items():
+    print(key, value)
 ```
