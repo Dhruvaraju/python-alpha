@@ -30,6 +30,7 @@
     - [Dictionary comprehension](#dictionary-comprehension)
     - [Unpacking arguments](#unpacking-arguments)
     - [Unpacking keyword Arguments](#unpacking-keyword-arguments)
+    - [Object oriented programming](#object-oriented-programming)
 
 ### python
 
@@ -677,4 +678,28 @@ def dynamic_arguments_and_keyword_arguments(*args, **kwargs):
     for key, value in kwargs.items():
         print(key, value)
 dynamic_arguments_and_keyword_arguments('alpha','bravo','charlie','delta',alpha='01',bravo='02',charlie='03',delta='04')
+```
+### Object oriented programming
+- Treating code like real world objects and extracting methods to perform operations on it.
+- Create a class using the class keyword.
+- Every class in python has a default method called as `__init__` which will be run while instantiating a object of class.
+- init method takes `self` as default input parameter.
+- Any properties can be created inside init method and used across class.
+- Any behavior can be extracted by defining new methods.
+As sample class can be defined as below
+```python
+class Student:
+    def __init__(self):
+        self.name ="dexter"
+        self.standard =12
+        self.marks=[89,86,84,96,90]
+    
+    def average(self):
+        return sum(self.marks)/len(self.marks)
+```
+Average method can be called in two ways:
+```python
+student = Student()
+print(Student.average(student))
+print(student.average())
 ```
