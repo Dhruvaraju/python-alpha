@@ -31,6 +31,8 @@
     - [Unpacking arguments](#unpacking-arguments)
     - [Unpacking keyword Arguments](#unpacking-keyword-arguments)
     - [Object oriented programming](#object-oriented-programming)
+    - [Class methods and static methods](#class-methods-and-static-methods)
+    - [Class inheritance](#class-inheritance)
 
 ### python
 
@@ -679,40 +681,46 @@ def dynamic_arguments_and_keyword_arguments(*args, **kwargs):
         print(key, value)
 dynamic_arguments_and_keyword_arguments('alpha','bravo','charlie','delta',alpha='01',bravo='02',charlie='03',delta='04')
 ```
+
 ### Object oriented programming
+
 - Treating code like real world objects and extracting methods to perform operations on it.
 - Create a class using the class keyword.
 - Every class in python has a default method called as `__init__` which will be run while instantiating a object of class.
 - init method takes `self` as default input parameter.
 - Any properties can be created inside init method and used across class.
 - Any behavior can be extracted by defining new methods.
-As sample class can be defined as below
+  As sample class can be defined as below
+
 ```python
 class Student:
     def __init__(self):
         self.name ="dexter"
         self.standard =12
         self.marks=[89,86,84,96,90]
-    
+
     def average(self):
         return sum(self.marks)/len(self.marks)
 ```
+
 Average method can be called in two ways:
+
 ```python
 student = Student()
 print(Student.average(student))
 print(student.average())
 ```
+
 - a class cna also be created with init method accepting parameters an example is present below
-**Magic methods**
-**str**
+  **Magic methods**
+  **str**
 - an str method is used to print the class in a string format.
 - Generally used to print in a file
-- Signature of str method ```def __str__(self):```
-**repr**
+- Signature of str method `def __str__(self):`
+  **repr**
 - an repr method is used to print the class in a string format.
 - Generally used to print in console while debugging
-- Signature of str method ```def __repr__(self):```
+- Signature of str method `def __repr__(self):`
 - If both repr and str method is present only str method will be invoked.
 
 ```python
@@ -738,4 +746,121 @@ print(student)
 # If str function is not present and a repr method is present it will return the return of repr method
 # repr is generally used to print the object in the console
 # str is used for printing the object in the file
+```
+
+### Class methods and static methods
+
+**Instance Methods:**
+
+- General methods in a class with `self` being passed as an input.
+- Used for data manipulation of the class properties.
+
+**Class methods:**
+
+- Used when you need to create restrict usage of particular variables.
+- Limit functionality or restrict usage of class properties.
+- Takes class instance as input, generally named as cls.
+- method is annotated with `@classmethod`
+
+**Static methods:**
+
+- Do not take class reference as input.
+- Used for logical grouping of methods in a class.
+- Generally a function inside a class can be called static method.
+- annotated with `@staticmethod`
+
+```python
+class Book:
+    type = "Hardcover", "Paperback"
+    def __init__(self, title, type, author):
+        self.title = title
+        self.type = type
+        self.author = author
+
+    def instance_method(self):
+        print("Instance method called")
+        return(f"Title: {self.title} is a {self.type} book authored by {self.author}")
+
+    @classmethod
+    def class_method(cls):
+        return ("Class method called")
+
+    @classmethod
+    def hardcover(cls, title, author):
+        return (f"Book {title} by {author} is a {cls.type[0]} book")
+
+    @classmethod
+    def paperback(cls, title, author):
+        return (f"Book {title} by {author} is a {cls.type[1]} book")
+
+    @staticmethod
+    def static_method():
+        return ("Static method called")
+
+    def __repr__(self):
+        return (f"<Book {self.title} {self.type} {self.author} >")
+
+# To call an instance method we need to create an instance of the class
+# and then call the instance method
+book = Book("Python", "Hardcover", "Guido van Rossum")
+print(book.__repr__())
+print(book.instance_method())
+
+# to call a static or class method we can call the class directly no need of creating an instance
+print(Book.class_method())
+print(Book.static_method())
+
+# We can call hardcover and paperback methods without passing the type of book
+hardcover = Book.hardcover("Trojan Horse", "Mark Russanovich")
+paperback = Book.paperback("Black Hawk Down", "Jack")
+print(hardcover)
+print(paperback)
+```
+
+### Class inheritance
+
+- To inherit properties and methods of another class pass the initial class as class parameter.
+- Use `super` keyword to access initial class parameters.
+- In the below example printer class inherits device class
+
+```python
+class Device:
+    def __init__(self, name, connected_by):
+        self.name = name
+        self.connected_by = connected_by
+        self.connected = True
+
+    def __str__(self):
+        return f"Device {self.name} {self.connected_by}"
+
+    def disconnect(self):
+        self.connected = False
+        print(f"{self.name} has disconnected.")
+
+class Printer(Device):
+    def __init__(self, name, connected_by, capacity):
+        super().__init__(name, connected_by)
+        self.capacity = capacity
+        self.remaining_pages = capacity
+
+    def __str__(self):
+        print(f"{super().__str__()} {self.remaining_pages} pages")
+
+    def print(self, pages):
+        if not self.connected:
+            print("Your printer is not connected.")
+            return
+        print(f"Printing {pages} pages.")
+        self.remaining_pages -= pages
+
+    def refill(self):
+        self.remaining_pages = self.capacity
+        print(f"Your printer has been refilled.")
+
+office_printer = Printer("Printer", "USB", 500)
+office_printer.__str__()
+office_printer.print(100)
+office_printer.__str__()
+office_printer.disconnect()
+office_printer.print(100)
 ```
