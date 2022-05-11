@@ -1,6 +1,9 @@
+from tokenize import String
+
+
 class Book:
     type = "Hardcover", "Paperback"
-    def __init__(self, title, type, author):
+    def __init__(self, title: String, type: String, author: String):
         self.title = title
         self.type = type
         self.author = author
@@ -10,11 +13,11 @@ class Book:
         return(f"Title: {self.title} is a {self.type} book authored by {self.author}")
 
     @classmethod
-    def class_method(cls):
+    def class_method(cls) -> String:
         return ("Class method called")
     
     @classmethod
-    def hardcover(cls, title, author):
+    def hardcover(cls, title: String, author: String) -> 'Book':
         return (f"Book {title} by {author} is a {cls.type[0]} book")
     
     @classmethod

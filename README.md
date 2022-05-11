@@ -33,6 +33,10 @@
     - [Object oriented programming](#object-oriented-programming)
     - [Class methods and static methods](#class-methods-and-static-methods)
     - [Class inheritance](#class-inheritance)
+    - [Type Hinting](#type-hinting)
+    - [Imports](#imports)
+    - [Errors](#errors)
+    - [Custom Error](#custom-error)
 
 ### python
 
@@ -863,4 +867,109 @@ office_printer.print(100)
 office_printer.__str__()
 office_printer.disconnect()
 office_printer.print(100)
+```
+
+**Class composition**
+Using a class in another class without inheriting is called class composition.
+Class composition is used more in python when compared to inheritance.
+
+### Type Hinting
+- Type hinting is a way to mention the type of variable while passing it to a method
+- Mentioning the return type of a method.
+- While referencing the same class with in a class mention it in quotes.
+- Example mentioned below.
+
+```python
+@classmethod
+    def class_method(cls) -> String:
+        return ("Class method called")
+    
+    @classmethod
+    def hardcover(cls, title: String, author: String) -> 'Book':
+        return (f"Book {title} by {author} is a {cls.type[0]} book")
+```
+> Type hinting will show errors while writing itself in pycharm
+
+### Imports
+- getting code from one file to another.
+- To import a specific function from another file 
+```python
+from lib.module import add
+# where module is a file in the folder lib which is present in current working directory
+```
+- To import entire file we use
+```python
+import module
+```
+- Examples are present in imports folder
+
+### Errors
+- Used for identifying user when an exception occurs or code is not working as expected.
+- To throw an error use the `raise` keyword, followed by your error name.
+- There are many pre defined errors provided by python.
+- We can create a custom error as well.
+- We can parse a code to throw an error by using `try except` block like `try catch` in other languages
+- If code worked without any errors we can use an `else` clause for it.
+- To run some code no matter the output of tried code use `finally` clause.
+
+```python
+# A method with possibility of throwing an error.
+def division(x, y):
+    if (y == 0):
+        raise ValueError("Division by zero")
+    result = x / y
+
+# Try and except block
+# When value error occurs the except block will be invoked.
+# If no errors else block will be executed.
+# Finally will be executed in all scenarios.
+# 'e' will hold the error message that is added to the error.
+try:
+    division(1, 0)
+except ValueError as e:
+    print("Error due to zero as divisor, Stack Trace:",e)
+else:
+    print("No error")   # This will be executed if no error is raised
+finally:
+    print("This will be executed no matter what", "Process completed")
+```
+
+### Custom Error
+- a custom error class should extend the base Exception class or any other predefined exception
+- Custom exception class is just another name for a predefined exception class
+
+```python
+# a custom error class should extend the base Exception class or any other predefined exception
+# Custom exception class is just another name for a predefined exception class
+class TooManyPages(Exception):
+    pass
+
+class Book:
+    def __init__(self, name, total_pages: int, pages_read: int):
+        self.name = name
+        self.total_pages = total_pages
+        self.pages_read = pages_read
+    
+    def __repr__(self):
+        return f"<Book {self.name}, total pages: {self.total_pages}, read: {self.pages_read}>"
+    
+    def read(self, pages: int) -> 'Book':
+        if pages > self.total_pages or self.pages_read + pages > self.total_pages:
+            raise TooManyPages(f"You are trying to read {pages} pages, but the book has only {self.total_pages} pages")
+        else:
+            self.pages_read += pages
+            print(f"You have read {pages} pages of {self.total_pages}")
+
+python_book = Book("Python", 100, 0)
+python_book.read(10)
+print(python_book.__repr__())
+
+try:
+    python_book.read(110)
+except TooManyPages as e:
+    print("Exception Caught: ",e)
+else:
+    print("Book updated successfully")
+finally:
+    print("Process completed")
 ```
