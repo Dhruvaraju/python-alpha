@@ -38,6 +38,9 @@
     - [Errors](#errors)
     - [Custom Error](#custom-error)
     - [First Class functions](#first-class-functions)
+    - [Decorators](#decorators)
+    - [Decorator for Functions with Parameters](#decorator-for-functions-with-parameters)
+    - [Decorators with parameters](#decorators-with-parameters)
 
 ### python
 
@@ -1017,3 +1020,121 @@ def get_friend_details(friend):
 print (search_friend(friends, "John", get_friend_details))
 ```
 
+### Decorators
+- Allows to modify functions easily
+- A decorator  function is used to check few things before calling the initial function.
+- A decorator will be a wrapper over a function to add some restrictions while calling it.
+
+```python
+user = {"user_name": "John", "access_level":"guest"}
+
+def get_admin_access():
+    return "1234"
+
+# simple_decorator function is a wrapper function also called as decorator
+# Takes the function on which restriction need to be imposed.
+# Inside the decorator a function with the restriction logic will be placed
+def simple_decorator(function_passed):
+    def secure_pwd_function():
+        if user["access_level"] == "admin":
+            return function_passed()
+        else:
+            return "Not allowed"
+
+    return secure_pwd_function
+
+# Name of the initial function should be initiated with call to decorator function to use it
+# If initiation is not present then this will not work.
+get_admin_access = simple_decorator(get_admin_access)
+print(get_admin_access())
+```
+To make use of annotation style for decorator we can rewrite the above code as below
+
+```python
+import functools
+user = {"user_name": "John", "access_level":"guest"}
+
+def simple_decorator(function_passed):
+    @functools.wraps(function_passed)
+    def secure_pwd_function():
+        if user["access_level"] == "admin":
+            return function_passed()
+        else:
+            return "Not allowed"
+
+    return secure_pwd_function
+
+# Because of @simple_decorator, get_admin_access will be now named as the internal function in decorator
+# to avoid this we need to use functools module on the internal function
+@simple_decorator
+def get_admin_access():
+    return "1234"
+
+# Instead of using the below line we can use @simple_decorator on getadminaccess function
+# get_admin_access = simple_decorator(get_admin_access)
+# Without functools wraps name will be secure_pwd_function
+print(get_admin_access.__name__)
+
+```
+
+### Decorator for Functions with Parameters
+- The encapsulating function should take *args and **kwargs as input
+- While calling the original function we need to pass exact values else function call will fail.
+
+```python
+import functools
+user = {"user_name": "John", "access_level":"admin"}
+
+def simple_decorator(function_passed):
+    # Take *args and *kwargs as input
+    @functools.wraps(function_passed)
+    def secure_pwd_function(*args, **kwargs):
+        if user["access_level"] == "admin":
+            return function_passed(*args, **kwargs)
+        else:
+            return "Not allowed"
+
+    return secure_pwd_function
+
+@simple_decorator
+def get_admin_access(department):
+    if department == "IT":
+        return "2345"
+    else:
+        return "1234"
+
+# Call with proper values
+print(get_admin_access("IT"))
+```
+
+### Decorators with parameters
+- We need to create a factory function over the decorator function to pass parameters
+
+```python
+import functools
+user = {"user_name": "John", "access_level":"admin"}
+
+def check_access_level(access_level):
+    def simple_decorator(function_passed):
+        @functools.wraps(function_passed)
+        def secure_pwd_function():
+            if user["access_level"] == access_level:
+                return function_passed()
+            else:
+                return "Not allowed"
+
+        return secure_pwd_function
+    return simple_decorator
+
+@check_access_level("admin")
+def get_admin_access():
+        return "2345"
+
+@check_access_level("user")
+def get_user_access():
+        return "2345"
+    
+print(get_admin_access())
+print(get_user_access())
+```
+> Do not pass immutable data as default parameters for functions are methods
