@@ -41,6 +41,8 @@
     - [Decorators](#decorators)
     - [Decorator for Functions with Parameters](#decorator-for-functions-with-parameters)
     - [Decorators with parameters](#decorators-with-parameters)
+    - [Installing pyenv-win](#installing-pyenv-win)
+    - [pyenv list of commands](#pyenv-list-of-commands)
 
 ### python
 
@@ -878,6 +880,7 @@ Using a class in another class without inheriting is called class composition.
 Class composition is used more in python when compared to inheritance.
 
 ### Type Hinting
+
 - Type hinting is a way to mention the type of variable while passing it to a method
 - Mentioning the return type of a method.
 - While referencing the same class with in a class mention it in quotes.
@@ -887,27 +890,34 @@ Class composition is used more in python when compared to inheritance.
 @classmethod
     def class_method(cls) -> String:
         return ("Class method called")
-    
+
     @classmethod
     def hardcover(cls, title: String, author: String) -> 'Book':
         return (f"Book {title} by {author} is a {cls.type[0]} book")
 ```
+
 > Type hinting will show errors while writing itself in pycharm
 
 ### Imports
+
 - getting code from one file to another.
-- To import a specific function from another file 
+- To import a specific function from another file
+
 ```python
 from lib.module import add
 # where module is a file in the folder lib which is present in current working directory
 ```
+
 - To import entire file we use
+
 ```python
 import module
 ```
+
 - Examples are present in imports folder
 
 ### Errors
+
 - Used for identifying user when an exception occurs or code is not working as expected.
 - To throw an error use the `raise` keyword, followed by your error name.
 - There are many pre defined errors provided by python.
@@ -939,6 +949,7 @@ finally:
 ```
 
 ### Custom Error
+
 - a custom error class should extend the base Exception class or any other predefined exception
 - Custom exception class is just another name for a predefined exception class
 
@@ -953,10 +964,10 @@ class Book:
         self.name = name
         self.total_pages = total_pages
         self.pages_read = pages_read
-    
+
     def __repr__(self):
         return f"<Book {self.name}, total pages: {self.total_pages}, read: {self.pages_read}>"
-    
+
     def read(self, pages: int) -> 'Book':
         if pages > self.total_pages or self.pages_read + pages > self.total_pages:
             raise TooManyPages(f"You are trying to read {pages} pages, but the book has only {self.total_pages} pages")
@@ -979,6 +990,7 @@ finally:
 ```
 
 ### First Class functions
+
 - Functions are treated as variables and passed as variables to other functions.
 - Explained with examples below
 
@@ -1021,8 +1033,9 @@ print (search_friend(friends, "John", get_friend_details))
 ```
 
 ### Decorators
+
 - Allows to modify functions easily
-- A decorator  function is used to check few things before calling the initial function.
+- A decorator function is used to check few things before calling the initial function.
 - A decorator will be a wrapper over a function to add some restrictions while calling it.
 
 ```python
@@ -1048,6 +1061,7 @@ def simple_decorator(function_passed):
 get_admin_access = simple_decorator(get_admin_access)
 print(get_admin_access())
 ```
+
 To make use of annotation style for decorator we can rewrite the above code as below
 
 ```python
@@ -1078,7 +1092,8 @@ print(get_admin_access.__name__)
 ```
 
 ### Decorator for Functions with Parameters
-- The encapsulating function should take *args and **kwargs as input
+
+- The encapsulating function should take \*args and \*\*kwargs as input
 - While calling the original function we need to pass exact values else function call will fail.
 
 ```python
@@ -1108,6 +1123,7 @@ print(get_admin_access("IT"))
 ```
 
 ### Decorators with parameters
+
 - We need to create a factory function over the decorator function to pass parameters
 
 ```python
@@ -1133,8 +1149,52 @@ def get_admin_access():
 @check_access_level("user")
 def get_user_access():
         return "2345"
-    
+
 print(get_admin_access())
 print(get_user_access())
 ```
+
 > Do not pass immutable data as default parameters for functions are methods
+
+### Installing pyenv-win
+
+- pyenv is used to manage multiple versions of python in same machine
+- installation command via command prompt `pip install pyenv-win --target %USERPROFILE%\.pyenv`
+
+**Add System Settings**
+
+It's a easy way to use PowerShell here
+
+Adding PYENV, PYENV_HOME and PYENV_ROOT to your Environment Variables
+
+```
+[System.Environment]::SetEnvironmentVariable('PYENV',$env:USERPROFILE + "\.pyenv\pyenv-win\","User")
+[System.Environment]::SetEnvironmentVariable('PYENV_ROOT',$env:USERPROFILE + "\.pyenv\pyenv-win\","User")
+[System.Environment]::SetEnvironmentVariable('PYENV_HOME',$env:USERPROFILE + "\.pyenv\pyenv-win\","User")
+```
+
+Now adding the following paths to your USER PATH variable in order to access the pyenv command
+
+```
+[System.Environment]::SetEnvironmentVariable('path', $env:USERPROFILE + "\.pyenv\pyenv-win\bin;" + $env:USERPROFILE + "\.pyenv\pyenv-win\shims;" + [System.Environment]::GetEnvironmentVariable('path', "User"),"User")
+```
+
+### pyenv list of commands
+
+```
+   commands     List all available pyenv commands
+   local        Set or show the local application-specific Python version
+   global       Set or show the global Python version
+   shell        Set or show the shell-specific Python version
+   install      Install 1 or more versions of Python
+   uninstall    Uninstall 1 or more versions of Python
+   update       Update the cached version DB
+   rehash       Rehash pyenv shims (run this after switching Python versions)
+   vname        Show the current Python version
+   version      Show the current Python version and its origin
+   version-name Show the current Python version
+   versions     List all Python versions available to pyenv
+   exec         Runs an executable by first preparing PATH so that the selected Python
+   which        Display the full path to an executable
+   whence       List all Python versions that contain the given executable
+```
