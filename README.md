@@ -43,6 +43,7 @@
     - [Decorators with parameters](#decorators-with-parameters)
     - [Installing pyenv-win](#installing-pyenv-win)
     - [pyenv list of commands](#pyenv-list-of-commands)
+    - [Virtual environments](#virtual-environments)
 
 ### python
 
@@ -1197,4 +1198,40 @@ Now adding the following paths to your USER PATH variable in order to access the
    exec         Runs an executable by first preparing PATH so that the selected Python
    which        Display the full path to an executable
    whence       List all Python versions that contain the given executable
+```
+
+- To set a global version of python we use `pyenv global <<version number>>` example `pyenv global 3.9.6`
+- To get list of available installations we use `pyenv install --list`
+
+### Virtual environments
+
+- Used to isolate a python app with its dependencies
+- Basically binding an app with specific version of python.
+- to do it `<<complete path to python exe>> -m venv .venv`
+- example `c:/programfiles/python/python.exe -m venv .venv`
+- Or when using pyenv `pyenv exec python -m venv .venv`
+- After setting virtual environment we have to activate it by using command
+
+```
+source .venv/Scripts/activate #on a linux or mac or
+.venv/Scripts/activate.bat #On a windows
+```
+
+- Now the command line will have a (.venv) before the prompt on each line.
+- with this every package that is installed will be installed in the `.venv` folder
+
+> Additional information on virtual environments: https://www.youtube.com/watch?v=KxvKCSwlUv8
+
+- Generally when we want o install dependencies we use a requirements.txt and mention the dependencies
+- For dev dependencies we use requirements-dev.txt
+- For installing those dependencies use
+  - Activate virtual environment
+  - `pip install -r requirements.txt`
+
+**Example requirments.txt**
+
+```
+flask==1.0.1
+requests>=1.1.2,<2.0.0
+gunicorn
 ```
