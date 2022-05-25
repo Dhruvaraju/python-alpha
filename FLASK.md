@@ -51,3 +51,58 @@ flask run
 
 - It will start the app on `http://127.0.0.1:5000`
 - Now we can access our routs by appending them towards the end.
+
+### render_template
+
+- For rendering larger html files we use render template
+- import `render_template` from flask
+- create a new folder under root of project named as `template`
+- create all your html files in templates folder, as flask by default checks templates folder for html files.
+- in the function now we can return render_template with html file name, example below
+
+```python
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route('/fp')
+def hello_world():
+    return render_template('first_page.html')
+
+@app.route('/sp')
+def greet_user():
+    return render_template('second_page.html')
+
+```
+
+### Jinja2
+
+- A template language which is used to replace variables in string with syntactic sugar `{{ var_name }}`
+- Jinja2 comes with flask by default.
+- we need to place template variables in html and replace them in the functions
+
+**html example**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jinja example</title>
+  </head>
+  <body>
+    <h2>Hi {{ username }} !</h2>
+    <p>This is an example for {{ framework }}</p>
+  </body>
+</html>
+```
+
+**jinja template replacement**
+
+```python
+@app.route('/jinja2')
+def jinja2():
+    return render_template('jinja2.html',username='dexter', framework='flask')
+```

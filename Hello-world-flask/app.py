@@ -1,16 +1,15 @@
-from flask import Flask 
+from flask import Flask, render_template 
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/fp')
 def hello_world():
-    return 'Hello World!'
+    return render_template('first_page.html')
 
-@app.route('/greet')
+@app.route('/sp')
 def greet_user():
-    return """
-    <html>
-    <h2> Hello User!</h2
-    <p> Welcome to the website </p>
-    </html>
-    """
+    return render_template('second_page.html')
+    
+@app.route('/jinja2')
+def jinja2():
+    return render_template('jinja2.html',username='dexter', framework='flask')
