@@ -106,3 +106,50 @@ def greet_user():
 def jinja2():
     return render_template('jinja2.html',username='dexter', framework='flask')
 ```
+
+### Expressions in jinja2
+- We can use interpolation for string replacement.
+- Arithmetic operations on numbers can be done.
+- String concatenation can be performed.
+- When we have multiple variables that need to be replaced, we add them as a dictionary and replace them.
+  
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expressions</title>
+  </head>
+  <body style="background-color: beige">
+    <div style="border: 2px; border-style: solid">
+      <h2>Hi {{ username }} !</h2>
+      <p>This is an example for {{ framework }}</p>
+    </div>
+    <div style="border: 2px; border-style: solid">
+      <p>We have {{ apple_count }} apples and {{ orange_count }} oranges</p>
+      <p>We have a total of {{ apple_count + orange_count }} fruit.</p>
+    </div>
+    <div style="border: 2px; border-style: solid">
+      <p>Serials to watch are {{ series01 + ' ' + series02}}</p>
+    </div>
+  </body>
+</html>
+
+```
+
+```python
+userInfo ={
+    "username": "dexter",
+    "framework": "flask",
+    "apple_count": 10,
+    "orange_count": 20,
+    "series01": "dexter",
+    "series02": "flash",
+}
+
+@app.route('/express/')
+def express():
+    return render_template('expressions.html', **userInfo)
+```

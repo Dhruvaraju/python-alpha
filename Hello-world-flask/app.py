@@ -13,3 +13,16 @@ def greet_user():
 @app.route('/jinja2')
 def jinja2():
     return render_template('jinja2.html',username='dexter', framework='flask')
+
+userInfo ={
+    "username": "dexter",
+    "framework": "flask",
+    "apple_count": 10,
+    "orange_count": 20,
+    "series01": "dexter",
+    "series02": "flash",
+}
+
+@app.route('/express/')
+def express():
+    return render_template('expressions.html', **userInfo)
