@@ -1,3 +1,12 @@
+- [What is flask?](#what-is-flask)
+- [Writing first flask app](#writing-first-flask-app)
+- [render_template](#render_template)
+- [Jinja2](#jinja2)
+- [Expressions in jinja2](#expressions-in-jinja2)
+- [Data Structures in jinja 2](#data-structures-in-jinja-2)
+- [If conditional in jinja](#if-conditional-in-jinja)
+- [For loop in jinja 2](#for-loop-in-jinja-2)
+
 ### What is flask?
 
 - Flask is a light weight WSGI application framework.
@@ -257,7 +266,7 @@ def parsingDataStructures():
 
 ### If conditional in jinja
 
-- We cna parse if in jinja using the following syntax
+- We can parse if in jinja using the following syntax
 
 ```html
 {% if state== 'AP' %}
