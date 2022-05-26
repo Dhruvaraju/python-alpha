@@ -60,4 +60,8 @@ allInfoAsObject = {
 def parsingDataStructures():
     return render_template('datastructures.html', **allInfoAsObject)
 
+@app.route('/if')
+def ifUsage():
+    return render_template('if.html', state="TN")
+
 

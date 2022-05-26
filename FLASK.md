@@ -254,3 +254,17 @@ allInfoAsObject = {
 def parsingDataStructures():
     return render_template('datastructures.html', **allInfoAsObject)
 ```
+
+### If conditional in jinja
+
+- We cna parse if in jinja using the following syntax
+
+```html
+{% if state== 'AP' %}
+<h1>Andhra Pradesh</h1>
+{% elif state== 'TN' %}
+<h1>Tamil Nadu</h1>
+{% else %}
+<h1>Unknown</h1>
+{% endif %}
+```
