@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Structures in Jinja2</title>
+</head>
+<body>
+    <div style="border: 2px; border-style: solid">
+    <h2>Lists and tuples</h2>
+    <p>From List</p>
+    DC Characters are:
+    <ul>
+        <li>{{ list_example[0] }}</li>
+        <li>{{ list_example[1] }}</li>
+        <li>{{ list_example[2] }}</li>
+    </ul>
+    <p>From Tuple</p>
+    Marvel Characters
+    <ul>
+        <li>{{ tuple_example[0] }}</li>
+        <li>{{ tuple_example[1] }}</li>
+        <li>{{ tuple_example[2] }}</li>
+    </ul>
+    </div>
+    <div style="border: 2px; border-style: solid">
+        Below are the details about superman
+    <p>
+        <ul>
+            <li>city he lives in {{ dictionary_example["city"] }}</li>
+            <li>His nemesis is {{ dictionary_example["Villain"] }}</li>
+            <li>Works as {{ dictionary_example["job"] }}</li>
+            <li>For news-paper {{ dictionary_example["new-paper"] }}</li>
+        </ul>
+    </p>
+    </div>
+    <div style="border: 2px; border-style: solid">
+    <h4>Info on book from a class</h4>
+    <p>
+        <ul>
+            <li>Title: {{ bookInfo.name }}</li>
+            <li>Author: {{ bookInfo.author }}</li>
+            <li>Version: {{ bookInfo.version }}</li>
+        </ul>
+    </div>
+    
+</body>
+</html>

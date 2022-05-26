@@ -108,11 +108,12 @@ def jinja2():
 ```
 
 ### Expressions in jinja2
+
 - We can use interpolation for string replacement.
 - Arithmetic operations on numbers can be done.
 - String concatenation can be performed.
 - When we have multiple variables that need to be replaced, we add them as a dictionary and replace them.
-  
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -136,7 +137,6 @@ def jinja2():
     </div>
   </body>
 </html>
-
 ```
 
 ```python
@@ -152,4 +152,105 @@ userInfo ={
 @app.route('/express/')
 def express():
     return render_template('expressions.html', **userInfo)
+```
+
+### Data Structures in jinja 2
+
+- We can pass the following as info to jinja2
+  - tuple
+  - list
+  - dictionary
+  - class
+
+To render_template we can pass every variable as a separate value or as a object
+
+**Eg html template**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Structures in Jinja2</title>
+</head>
+<body>
+    <div style="border: 2px; border-style: solid">
+    <h2>Lists and tuples</h2>
+    <p>From List</p>
+    DC Characters are:
+    <ul>
+        <li>{{ list_example[0] }}</li>
+        <li>{{ list_example[1] }}</li>
+        <li>{{ list_example[2] }}</li>
+    </ul>
+    <p>From Tuple</p>
+    Marvel Characters
+    <ul>
+        <li>{{ tuple_example[0] }}</li>
+        <li>{{ tuple_example[1] }}</li>
+        <li>{{ tuple_example[2] }}</li>
+    </ul>
+    </div>
+    <div style="border: 2px; border-style: solid">
+        Below are the details about superman
+    <p>
+        <ul>
+            <li>city he lives in {{ dictionary_example["city"] }}</li>
+            <li>His nemesis is {{ dictionary_example["Villain"] }}</li>
+            <li>Works as {{ dictionary_example["job"] }}</li>
+            <li>For news-paper {{ dictionary_example["new-paper"] }}</li>
+        </ul>
+    </p>
+    </div>
+    <div style="border: 2px; border-style: solid">
+    <h4>Info on book from a class</h4>
+    <p>
+        <ul>
+            <li>Title: {{ bookInfo.name }}</li>
+            <li>Author: {{ bookInfo.author }}</li>
+            <li>Version: {{ bookInfo.version }}</li>
+        </ul>
+    </div>
+
+</body>
+</html>
+```
+
+**Eg flask code**
+
+```python
+class appInfo:
+    def __init__(self, name, version, author):
+        self.name=name
+        self.version=version
+        self.author=author
+
+list_example = [
+"Superman",
+"Flash",
+"Arrow"
+]
+
+tuple_example = (
+"Iron-man",
+"Loki",
+"Thor"
+)
+
+dictionary_example = {"city":"Metropolis", "Villain":"Lex","job": "reporter", "new-paper": "Daily-planet"}
+
+bookInfo = appInfo("trojan horse", "1.0", "mark russanovich")
+
+allInfoAsObject = {
+    "list_example": list_example,
+    "tuple_example": tuple_example,
+    "dictionary_example": dictionary_example,
+    "bookInfo": bookInfo
+}
+
+@app.route('/data')
+def parsingDataStructures():
+    return render_template('datastructures.html', **allInfoAsObject)
 ```

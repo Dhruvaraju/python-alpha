@@ -1,5 +1,11 @@
 from flask import Flask, render_template 
 
+class appInfo:
+    def __init__(self, name, version, author):
+        self.name=name
+        self.version=version
+        self.author=author
+
 app = Flask(__name__)
 
 @app.route('/fp')
@@ -26,3 +32,32 @@ userInfo ={
 @app.route('/express/')
 def express():
     return render_template('expressions.html', **userInfo)
+
+list_example = [
+"Superman",
+"Flash",
+"Arrow"
+]
+
+tuple_example = (
+"Iron-man",
+"Loki",
+"Thor"
+)
+
+dictionary_example = {"city":"Metropolis", "Villain":"Lex","job": "reporter", "new-paper": "Daily-planet"}
+
+bookInfo = appInfo("trojan horse", "1.0", "mark russanovich")
+
+allInfoAsObject = {
+    "list_example": list_example,
+    "tuple_example": tuple_example,
+    "dictionary_example": dictionary_example,
+    "bookInfo": bookInfo
+}
+
+@app.route('/data')
+def parsingDataStructures():
+    return render_template('datastructures.html', **allInfoAsObject)
+
+
