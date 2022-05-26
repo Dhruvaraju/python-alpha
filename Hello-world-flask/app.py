@@ -64,4 +64,7 @@ def parsingDataStructures():
 def ifUsage():
     return render_template('if.html', state="TN")
 
+@app.route('/for')
+def forUsage():
+    return render_template('for.html', dcCharacters=list_example, supermanData = dictionary_example)
 

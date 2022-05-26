@@ -268,3 +268,16 @@ def parsingDataStructures():
 <h1>Unknown</h1>
 {% endif %}
 ```
+
+### For loop in jinja 2
+
+- Used to iterate through list, tuple, set, dictionary
+
+```html
+Displaying list of dc characters from list: {% for character in dcCharacters %}
+<li>{{ character }}</li>
+{% endfor %} Displaying from dictionary: {% for key, value in
+supermanData.items() %}
+<li>{{ key }}: {{ value }}</li>
+{% endfor %}
+```
