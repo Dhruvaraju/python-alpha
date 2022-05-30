@@ -283,9 +283,12 @@ def parsingDataStructures():
 - Used to iterate through list, tuple, set, dictionary
 
 ```html
-Displaying list of dc characters from list: {% for character in dcCharacters %}
+Displaying list of dc characters from list: 
+{% for character in dcCharacters %}
 <li>{{ character }}</li>
-{% endfor %} Displaying from dictionary: {% for key, value in
+{% endfor %} 
+Displaying from dictionary: 
+{% for key, value in
 supermanData.items() %}
 <li>{{ key }}: {{ value }}</li>
 {% endfor %}
