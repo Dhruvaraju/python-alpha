@@ -1,4 +1,3 @@
-from asyncio.windows_events import NULL
 from flask import Flask, redirect, render_template, request, url_for
 
 app = Flask(__name__)
@@ -20,8 +19,7 @@ def homePage():
 @app.route('/dashboard', methods=['GET','POST'])
 def dashboard():
     if request.method == 'POST':
-        if(request.form != NULL):
-            # Use Request and call
+        if(request.form is not None):
             return redirect('/')
         return render_template('dashboard.html',username=username)
     return render_template('dashboard.html', username=username)
