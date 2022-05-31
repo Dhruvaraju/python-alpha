@@ -6,6 +6,7 @@
 - [Data Structures in jinja 2](#data-structures-in-jinja-2)
 - [If conditional in jinja](#if-conditional-in-jinja)
 - [For loop in jinja 2](#for-loop-in-jinja-2)
+- [Receiving data from html](#receiving-data-from-html)
 
 ### What is flask?
 
@@ -283,13 +284,73 @@ def parsingDataStructures():
 - Used to iterate through list, tuple, set, dictionary
 
 ```html
-Displaying list of dc characters from list: 
-{% for character in dcCharacters %}
+Displaying list of dc characters from list: {% for character in dcCharacters %}
 <li>{{ character }}</li>
-{% endfor %} 
-Displaying from dictionary: 
-{% for key, value in
+{% endfor %} Displaying from dictionary: {% for key, value in
 supermanData.items() %}
 <li>{{ key }}: {{ value }}</li>
 {% endfor %}
+```
+
+### Receiving data from html
+
+- We make use of forms to get data back from html
+- `action` attribute is added to form tag to specify the uri to which the form should return data
+- `method` attribute is used to specify http method.
+- `name` attribute should be mentioned for each field in form and value should be unique for it.
+- data will be returned to python file, as a json where name of filed will be the key and value of the filed as its value.
+- The json can be fetched by using the `request.form` attribute on python file.
+
+Eg HTML:
+
+```html
+<form class="p-4 p-md-5 border rounded-3 bg-light" action="/" method="POST">
+  <div class="form-floating mb-3">
+    <input
+      type="text"
+      class="form-control"
+      id="floatingInput"
+      name="username"
+      placeholder="Enter user name"
+    />
+    <label for="floatingInput">Username</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input
+      type="password"
+      class="form-control"
+      name="password"
+      id="floatingPassword"
+      placeholder="Password"
+    />
+    <label for="floatingPassword">Password</label>
+  </div>
+  <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
+  <hr class="my-4" />
+  <small class="text-muted"
+    >By clicking Sign up, you agree to the terms of use.</small
+  >
+</form>
+```
+
+eg flask code:
+
+```python
+from flask import Flask, redirect, render_template, request, url_for
+
+app = Flask(__name__)
+
+username = ""
+
+@app.route('/', methods=['GET','POST'])
+def homePage():
+    if request.method == 'POST':
+        username = request.form['username']
+        cred =  request.form['password']
+        if (username == 'alpha' and cred == 'alpha'):
+            return redirect('/dashboard')
+        else:
+            return render_template('home.html')
+    else:
+        return render_template('home.html')
 ```
