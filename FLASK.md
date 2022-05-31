@@ -7,6 +7,7 @@
 - [If conditional in jinja](#if-conditional-in-jinja)
 - [For loop in jinja 2](#for-loop-in-jinja-2)
 - [Receiving data from html](#receiving-data-from-html)
+- [Formatting Dates](#formatting-dates)
 
 ### What is flask?
 
@@ -353,4 +354,16 @@ def homePage():
             return render_template('home.html')
     else:
         return render_template('home.html')
+```
+
+### Formatting Dates
+
+- Can be done using datetime module
+
+```python
+datetime.datetime.today().strftime("%Y-%m-%d)
+# This will show date as 2020-12-28
+
+datetime.datetime.today().strftime("%Y-%m-%d).strftime("%b %d")
+# Will provide date as Nov 23
 ```
