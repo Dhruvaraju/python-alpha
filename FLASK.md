@@ -8,6 +8,7 @@
 - [For loop in jinja 2](#for-loop-in-jinja-2)
 - [Receiving data from html](#receiving-data-from-html)
 - [Formatting Dates](#formatting-dates)
+- [Connecting to mongo db](#connecting-to-mongo-db)
 
 ### What is flask?
 
@@ -367,3 +368,9 @@ datetime.datetime.today().strftime("%Y-%m-%d)
 datetime.datetime.today().strftime("%Y-%m-%d).strftime("%b %d")
 # Will provide date as Nov 23
 ```
+
+### Connecting to mongo db
+
+- To connect to mongodb we need a package called pymongo
+- use `pip install pymongo[srv]` to install pymongo
+- we can use MongoClient to read and update date from mongo db.
