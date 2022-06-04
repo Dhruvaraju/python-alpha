@@ -10,6 +10,7 @@
 - [Formatting Dates](#formatting-dates)
 - [Connecting to mongo db](#connecting-to-mongo-db)
 - [Flask App Factory pattern](#flask-app-factory-pattern)
+- [requirements.txt](#requirementstxt)
 
 ### What is flask?
 
@@ -386,4 +387,15 @@ datetime.datetime.today().strftime("%Y-%m-%d).strftime("%b %d")
 - All the entire app.py code in it
 - While deploying or running flask will check for create_app function and run it only once.
 
+### requirements.txt
 
+- A file in which we place all the requirements related to a flask app.
+- an example app using flask and pymongo will have a requirements.txt as below
+
+```
+flask
+pymongo[str]
+```
+
+- This will also let developers know what all packages are required to run an app.
+- to install all these dependencies at once use command `pip install -r requirements.txt`
