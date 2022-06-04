@@ -9,6 +9,7 @@
 - [Receiving data from html](#receiving-data-from-html)
 - [Formatting Dates](#formatting-dates)
 - [Connecting to mongo db](#connecting-to-mongo-db)
+- [Flask App Factory pattern](#flask-app-factory-pattern)
 
 ### What is flask?
 
@@ -374,3 +375,15 @@ datetime.datetime.today().strftime("%Y-%m-%d).strftime("%b %d")
 - To connect to mongodb we need a package called pymongo
 - use `pip install pymongo[srv]` to install pymongo
 - we can use MongoClient to read and update date from mongo db.
+
+> When we try to refresh the page the earlier request will resubmit again to avoid this go to url bar and keep cursor then, give refresh.
+
+### Flask App Factory pattern
+
+- While trying to deploy flask apps, there might be a chance that the code in app.py or main code file might run multiple times.
+- To avoid it we use app factory.
+- create new function called `def create_app():` and `return app` at end of function
+- All the entire app.py code in it
+- While deploying or running flask will check for create_app function and run it only once.
+
+
