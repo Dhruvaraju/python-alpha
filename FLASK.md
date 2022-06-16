@@ -11,6 +11,7 @@
 - [Connecting to mongo db](#connecting-to-mongo-db)
 - [Flask App Factory pattern](#flask-app-factory-pattern)
 - [requirements.txt](#requirementstxt)
+- [Getting App ready for Heroku](#getting-app-ready-for-heroku)
 
 ### What is flask?
 
@@ -399,3 +400,23 @@ pymongo[str]
 
 - This will also let developers know what all packages are required to run an app.
 - to install all these dependencies at once use command `pip install -r requirements.txt`
+
+### Getting App ready for Heroku
+- We need to add a file called `runtime.txt`
+- It contains the version of python that we will be using in a python app.
+- We just need to mention the python version
+```
+python-3.9.4
+```
+- Heroku cannot run python app straight away it needs a package called as `gunicorn`
+- Add it to requirements.txt
+- Heroku needs a file called `Procfile` to identify the command that need to be run for starting python app.
+- In Procfile enter the following command 
+
+```commandline
+web: gunicorn "app:create_app()"
+// web specifies that this is a web app
+// gunicorn is to let heroku know it need to use gunicorn
+// app:create_app() will let heroku know that starting files is app.py and run the create_app() function as entry point.
+```
+
