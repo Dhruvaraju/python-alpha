@@ -420,3 +420,4 @@ web: gunicorn "app:create_app()"
 // app:create_app() will let heroku know that starting files is app.py and run the create_app() function as entry point.
 ```
 
+> gunicorn works in linux and mac, but it will not work in windows.
