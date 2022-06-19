@@ -12,6 +12,7 @@
 - [Flask App Factory pattern](#flask-app-factory-pattern)
 - [requirements.txt](#requirementstxt)
 - [Getting App ready for Heroku](#getting-app-ready-for-heroku)
+- [.env](#env)
 
 ### What is flask?
 
@@ -402,16 +403,19 @@ pymongo[str]
 - to install all these dependencies at once use command `pip install -r requirements.txt`
 
 ### Getting App ready for Heroku
+
 - We need to add a file called `runtime.txt`
 - It contains the version of python that we will be using in a python app.
 - We just need to mention the python version
+
 ```
 python-3.9.4
 ```
+
 - Heroku cannot run python app straight away it needs a package called as `gunicorn`
 - Add it to requirements.txt
 - Heroku needs a file called `Procfile` to identify the command that need to be run for starting python app.
-- In Procfile enter the following command 
+- In Procfile enter the following command
 
 ```commandline
 web: gunicorn "app:create_app()"
@@ -421,3 +425,26 @@ web: gunicorn "app:create_app()"
 ```
 
 > gunicorn works in linux and mac, but it will not work in windows.
+
+### .env
+
+- We use `.env` to set environment variables for an application.
+- install `python-dotenv` package
+- import `load_dotenv` from `dotenv`
+- initiate the function `load_dotenv()`, we should be able to get environment variables.
+- To get env variables use `os` package
+- fetch them using `os.environ.get("environment-variable")`
+
+```python
+import os
+from dotenv import load_dotenv()
+
+load_dotenv()
+mongo_url = os.environ.get("MONGO_URL")
+```
+
+example .env file
+
+```text
+MONGO_URL="url-for-mongodb"
+```
