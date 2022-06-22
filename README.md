@@ -915,6 +915,12 @@ from lib.module import add
 import module
 ```
 
+- Consider you have created a file `app.py`
+- in the same location you have created a folder common-utils and created a file `custom-ops.py`
+- now to import functions in custom-ops to app file create a `__init__.py` empty file in the common-utils folder
+- use import statement as `import common-util.custom-ops as ops`
+- now you can access all the functions in custom-ops as ops.functionName
+
 - Examples are present in imports folder
 
 ### Errors
