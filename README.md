@@ -45,6 +45,10 @@
     - [pyenv list of commands](#pyenv-list-of-commands)
     - [Virtual environments](#virtual-environments)
 
+> Additional information
+> - [About Flask Apps](flask.md)
+> - [Web-Scrapping](sample-apps/scrapping-apps/web-scrapping.md)
+
 ### python
 
 - A scripting language, which can be used for automating tasks

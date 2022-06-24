@@ -10,7 +10,7 @@
 def get_driver():
   # Setting Browser options to enable automation on a linux machine
   options = webdriver.ChromeOptions()
-  options.add_argument('disbale-infobars')
+  options.add_argument('disable-infobars')
   options.add_argument('start-maximized')
   options.add_argument('disable-dev-shm-usage')
   options.add_argument('no-sandbox')
@@ -36,4 +36,21 @@ def main():
 print('Initiating Test...')
 print (main())
 print('Test Completed...')
+```
+
+### Running same code locally
+
+- The same code might not run in a local environment. We need to add chrome driver
+- Download chrome drive from https://chromedriver.chromium.org/downloads
+- import service from selenium and add the location to chrome driver as below
+
+```python
+from selenium.webdriver.chrome.service import Service
+service = Service("C:\selenium-drivers\chromedriver.exe")
+```
+
+- Add it to driver options as Below
+
+```python
+ driver = webdriver.Chrome(service= service, options= options)
 ```
