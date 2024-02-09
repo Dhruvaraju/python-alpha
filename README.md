@@ -1,6 +1,6 @@
 # python_alpha
 
-- [python_alpha](#python_alpha)
+- [python\_alpha](#python_alpha)
     - [python](#python)
     - [Workspace setup](#workspace-setup)
     - [First program](#first-program)
@@ -46,8 +46,8 @@
     - [Virtual environments](#virtual-environments)
 
 > Additional information
-> - [About Flask Apps](flask.md)
-> - [Web-Scrapping](sample-apps/scrapping-apps/web-scrapping.md)
+> - [About Flask Apps](00-flask-learning.md)
+> - [Web-Scrapping](03-sample-apps/scrapping-apps/web-scrapping.md)
 
 ### python
 
